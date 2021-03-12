@@ -33,7 +33,7 @@ function getBows(req, res) {
 
 function getBowsFromDb (id, callback) {
     console.log("getting bow with id: ", id);
-    var sql = "SELECT * FROM compound WHERE id = $1::int";
+    var sql = "SELECT * FROM recurve WHERE id = $1::int";
     var params = [id];
 
     pool.query(sql, params, function (err, result) {
