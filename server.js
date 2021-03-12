@@ -11,33 +11,30 @@ app.use(express.static('public'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.get('/home', (req, res) => res.render('pages/index'))
-app.get('/findbows', () => {
-    var bows = getBows(req);
-    res.render("pages/results", { answer: bows });
-});
+app.get('/findbows', getBows)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
 function getBows(req, res) {
     console.log("into the getBows function")
-    const bowtype = req.query.bowtype;
-    console.log("Retrieving bows with bowtype: ", bowtype);
-    getBowsFromDb(bowtype, function(err, result){
+    const id = req.query.id;
+    console.log("Retrieving person with id: ", id);
+    getBowsFromDb(id, function(err, result){
         console.log("into the getBowsFromDb function with result:", result)
-        if (err || result == null || result.length < 1) {
+        if (err || result == null || result.length != 1) {
             res.status(500).json({success: false, data: err});
         }
         else {
-            res.json(result);
+            res.json(result[0]);
         }
     });    
 }
 
-function getBowsFromDb (bowtype, callback) {
-    console.log("getting bow with bowtype: ", bowtype);
-    var sql = "SELECT * FROM compound";
-    var params = [bowtype];
+function getBowsFromDb (id, callback) {
+    console.log("getting bow with id: ", id);
+    var sql = "SELECT * FROM compound WHERE id = $1::int";
+    var params = [id];
 
     pool.query(sql, params, function (err, result) {
         if (err) {
