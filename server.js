@@ -4,8 +4,13 @@ const path = require('path');
 const { Pool } = require("pg");
 const PORT = process.env.PORT || 5000
 
+// {"success":false,"data":{"length":167,"name":"error","severity":"FATAL","code":"28000","file":"auth.c","line":"515","routine":"ClientAuthentication"}}
+
 const connectionString = process.env.DATABASE_URL || "postgres://project2user:project2@localhost:5432/project2";
-const pool = new Pool({connectionString: connectionString});
+const pool = new Pool({connectionString: connectionString,
+ssl: {
+    rejectUnauthorized: false
+}});
 
 app.use(express.static('public'))
 app.set('views', path.join(__dirname, 'views'))
@@ -35,7 +40,7 @@ function getBowsFromDb (id, callback) {
     console.log("getting bow with id: ", id);
     var sql = "SELECT * FROM recurve WHERE id = $1::int";
     var params = [id];
-
+    pool.connect();
     pool.query(sql, params, function (err, result) {
         if (err) {
             console.log("An error occured retrieveing from the database");
@@ -44,5 +49,6 @@ function getBowsFromDb (id, callback) {
         }
         console.log("Found DB result: " + JSON.stringify(result.rows));
         callback(null, result.rows);
+        pool.end();
     });
 }
