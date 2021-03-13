@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postal Results</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+    <title>Bow Results</title>
 </head>
+
 <body>
-    <h1>Total Cost to Mail Item</h1>
-    <%= answer %>
+    <div class="container">
+        <h1>All *<%= type %>* Bows</h1>
+        <div class="list-group">
+            <% answer.forEach(function(o) { %>
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= o.name %></h5>
+                  <small>Level: <%= o.level %></small>
+                </div>
+                <p class="mb-1">Mass Weight: <%= o.massweight %></p>
+                <p class="mb-1">Axle 2 Axle: <%= o.axle2axle%></p>
+                <p class="mb-1">Draw Weight: <%= o.drawweight%></p>
+                <p class="mb-1">Draw Length: <%= o.drawlength%></p>
+                <p class="mb-1">Speed: <%= o.speed%></p>
+                <p class="mb-1">Color: <%= o.color%></p>
+                <small>Manufacturer: <%= o.url%></small>
+                        <!-- <form action="/moreinfo" method="GET">
+                            <input type="submit" name="moreinfo" value="Click Here for More Info"
+                        </form> -->
+                    <% }); %>
+            
+        </div>
+    </div>
+<br>
+<br>
 </body>
+
 </html>

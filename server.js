@@ -4,51 +4,71 @@ const path = require('path');
 const { Pool } = require("pg");
 const PORT = process.env.PORT || 5000
 
-// {"success":false,"data":{"length":167,"name":"error","severity":"FATAL","code":"28000","file":"auth.c","line":"515","routine":"ClientAuthentication"}}
-
 const connectionString = process.env.DATABASE_URL || "postgres://project2user:project2@localhost:5432/project2";
 const pool = new Pool({connectionString: connectionString,
-ssl: {
-    rejectUnauthorized: false
-}});
+// ssl: {
+//     rejectUnauthorized: false
+// }
+});
 
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.get('/home', (req, res) => res.render('pages/index'))
-app.get('/findbows', getBows)
-
+app.get('/findbows', getBows);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 
 function getBows(req, res) {
-    console.log("into the getBows function")
-    const id = req.query.id;
-    console.log("Retrieving person with id: ", id);
-    getBowsFromDb(id, function(err, result){
-        console.log("into the getBowsFromDb function with result:", result)
-        if (err || result == null || result.length != 1) {
+    // console.log("into the getBows function")
+    const bowtype = req.query.bowtype;
+    // console.log("Retrieving data with bowtype: ", bowtype);
+    getBowsFromDb(bowtype, function(err, result){
+        // console.log("into the getBowsFromDb function with result:" + JSON.stringify(result.rows));
+        if (err || result == null) {
+            console.log(err);
             res.status(500).json({success: false, data: err});
         }
         else {
-            res.json(result[0]);
+            // console.log("This is my result: \n" + JSON.stringify(result));
+            // console.log("This is the response: \n" + res);
+            const items = result;
+            
+            var str = JSON.stringify(items);
+            // res.status(200).json(items); This is for AJAX
+            // console.log("These are the new items after stringify: " + items);
+            // res.json(result.rows);
+            // console.log("This is the result before we stringify it \n" + items);
+            
+            // console.log("this is the string hopefully \n" + str);
+            // var object = JSON.parse(str);
+            // console.log("this is the object hopefully \n" + object);
+            // str.forEach(function(data){
+            //     console.log(data.name);
+            // });
+            
+            // app.get('/data', function(req, res){
+            //     res.render('data', {str: JSON.stringify(str) });
+            // });
+            
+            res.render("pages/results", { answer: items, type: bowtype});
         }
     });    
 }
 
-function getBowsFromDb (id, callback) {
-    console.log("getting bow with id: ", id);
-    var sql = "SELECT * FROM recurve WHERE id = $1::int";
-    var params = [id];
+function getBowsFromDb (bowtype, callback) {
+    // console.log("getting bow with bowtype: ", bowtype);
+    var sql = "SELECT name, drawweight, drawlength, massweight, speed, axle2axle, level, category, color, url FROM " + bowtype;
+    // console.log(sql);
+    // var params = [bowtype];
     pool.connect();
-    pool.query(sql, params, function (err, result) {
+    pool.query(sql, function (err, result) {
         if (err) {
             console.log("An error occured retrieveing from the database");
             console.log(err);
             callback(err, null);
         }
-        console.log("Found DB result: " + JSON.stringify(result.rows));
+        // console.log("Found DB result: " + JSON.stringify(result.rows));
         callback(null, result.rows);
-        pool.end();
     });
 }

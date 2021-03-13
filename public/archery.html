@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <title>Find Your Bow</title>
 </head>
 
@@ -12,15 +14,14 @@
     <div class="container">
         <h2>Find Cool Bows</h2>
         <div>
-            
-            <form action="/findbows" method="GET">
-                <label>Select Bow Type</label>
-                <select name="bowtype">
+            <form action="/findbows" method="GET" class="center">
+                <select class="custom-select" name="bowtype">
+                    <option selected>Choose Your Bow Type</option>
                     <option value="recurve">Recurve</option>
                     <option value="compound">Compound</option>
                 </select>
-                <input type="submit" name="findbows" value="Find Bows">
-                
+                <input class="btn btn-dark" type="submit" name="findbows" value="Find Bows">
+
             </form>
         </div>
     </div>
