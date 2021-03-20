@@ -1,3 +1,4 @@
+// Sheltered Shelf on Heroku app
 const express = require("express");
 const app = express();
 const path = require('path');
@@ -6,9 +7,9 @@ const PORT = process.env.PORT || 5000
 
 const connectionString = process.env.DATABASE_URL || "postgres://project2user:project2@localhost:5432/project2";
 const pool = new Pool({connectionString: connectionString,
-ssl: {
-    rejectUnauthorized: false
-}
+// ssl: {
+//     rejectUnauthorized: false
+// }
 });
 
 app.use(express.static(__dirname + '/public'))
@@ -33,24 +34,7 @@ function getBows(req, res) {
             // console.log("This is my result: \n" + JSON.stringify(result));
             // console.log("This is the response: \n" + res);
             const items = result;
-            
-            var str = JSON.stringify(items);
-            // res.status(200).json(items); This is for AJAX
-            // console.log("These are the new items after stringify: " + items);
-            // res.json(result.rows);
-            // console.log("This is the result before we stringify it \n" + items);
-            
-            // console.log("this is the string hopefully \n" + str);
-            // var object = JSON.parse(str);
-            // console.log("this is the object hopefully \n" + object);
-            // str.forEach(function(data){
-            //     console.log(data.name);
-            // });
-            
-            // app.get('/data', function(req, res){
-            //     res.render('data', {str: JSON.stringify(str) });
-            // });
-            
+            var str = JSON.stringify(items);            
             res.render("pages/results", { answer: items, type: bowtype});
         }
     });    

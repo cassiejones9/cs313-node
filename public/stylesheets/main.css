@@ -31,9 +31,14 @@ p {
   display: flex;
   justify-content: center;
   /* top, right & left, bottom */
-  margin: 10px;
+  margin: 20px;
 }
 
+img {
+  max-height: 200px;
+  margin: auto;
+  display: flex;
+}
 
 
 
