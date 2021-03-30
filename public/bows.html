@@ -6,194 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
+    <script src="/javascript/home.js"></script>
     <title>Find Your Bow</title>
 </head>
 
 <body>
-    <script type="module">
-        import { bows } from '/bows.js';
-        window.allBows = allBows;
-        window.bows = bows;
-        window.searchBows = searchBows;
-        window.save = save;
-        window.showFavorites = showFavorites;
-        window.addNewBowForm = addNewBowForm;
 
-        function searchBows() {
-            var bowtype = document.getElementById("bowtype").value;
-            var listofbows = window.bows.filter(bow => bow.type == bowtype);
-            // console.log("Bowtype: " + bowtype);
-            // var sql = "SELECT id, name, level, massweight, color FROM " + bowtype;
-            var string = "";
-            listofbows.forEach(bow => {
-                string += "<div class='list-group'>";
-                string += "<li class='list-group-item list-group-item-action flex-column align-items-start'>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<h5 class='mb-1'>" + bow.name + "</h5>";
-                string += "<small>Level: " + bow.level + "</small>";
-                string += "</div>";
-                string += "<img src='" + bow.imgSrc + "' alt='" + bow.name + "'></img>";
-                string += "<p class='mb-1'>Mass Weight: " + bow.massweight + "</p>";
-                string += "<p class='mb-1'>Axle 2 Axle: " + bow.axle2axle + "</p>";
-                string += "<p class='mb-1'>Draw Weight: " + bow.drawweight + "</p>";
-                string += "<p class='mb-1'>Draw Length: " + bow.drawlength + "</p>";
-                string += "<p class='mb-1'>Speed: " + bow.speed + "</p>";
-                string += "<p class='mb-1'>Color: " + bow.color + "</p>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<small>Manufacturer: " + bow.url + "</small>";
-                string += "<button class='btn btn-dark' onclick=save(" + bow.name + ")>Save Bow to Favorites</button>";
-                string += "</div>";
-                string += "</li>";
-            });
-            document.getElementById("bowslist").innerHTML = string;
-        }
-
-        function allBows() {
-            // console.log(bows);
-            var string = "";
-            bows.forEach(bow => {
-                string += "<div class='list-group'>";
-                string += "<li class='list-group-item list-group-item-action flex-column align-items-start'>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<h5 class='mb-1'>" + bow.name + "</h5>";
-                string += "<small>Level: " + bow.level + "</small>";
-                string += "</div>";
-                string += "<img src='" + bow.imgSrc + "' alt='" + bow.name + "'></img>";
-                string += "<p class='mb-1'>Mass Weight: " + bow.massweight + "</p>";
-                string += "<p class='mb-1'>Axle 2 Axle: " + bow.axle2axle + "</p>";
-                string += "<p class='mb-1'>Draw Weight: " + bow.drawweight + "</p>";
-                string += "<p class='mb-1'>Draw Length: " + bow.drawlength + "</p>";
-                string += "<p class='mb-1'>Speed: " + bow.speed + "</p>";
-                string += "<p class='mb-1'>Color: " + bow.color + "</p>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<small>Manufacturer: " + bow.url + "</small>";
-                string += "<button class='btn btn-dark' onclick=save(" + bow.name + ")>Save Bow to Favorites</button>";
-                string += "</div>";
-                string += "</li>";
-            });
-            document.getElementById("bowslist").innerHTML = string;
-        }
-
-        function save(bowname) {
-            console.log(bowname);
-            // console.log(JSON.stringify(specificBow));
-            var favoriteBows = this.getFavoriteBows();
-            if (favoriteBows == null) {
-                favoriteBows = new Array();
-            }
-            // make it so they can't add an item twice
-            let savedFavoriteBow = bowname;
-            let n = favoriteBows.includes(savedFavoriteBow);
-            // console.log(n);
-            if (n) {
-                let errormsg = document.getElementById("error");
-                errormsg.classList.remove("hidden");
-                window.setTimeout(() => errormsg.classList.add("hidden"), 3000);
-            }
-            else {
-                favoriteBows.push(savedFavoriteBow);
-                ls.set(favoriteBows);
-                this.showingSavedBows();
-            }
-        }
-
-        function showFavorites() {
-            // pull up bows in the list from above
-            // maybe filter them somehow
-            var favoritebows = window.bows.filter(bow => bow.type == bowtype);
-            var string = "";
-            listofbows.forEach(bow => {
-                string += "<div class='list-group'>";
-                string += "<li class='list-group-item list-group-item-action flex-column align-items-start'>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<h5 class='mb-1'>" + bow.name + "</h5>";
-                string += "<small>Level: " + bow.level + "</small>";
-                string += "</div>";
-                string += "<img src='" + bow.imgSrc + "' alt='" + bow.name + "'></img>";
-                string += "<p class='mb-1'>Mass Weight: " + bow.massweight + "</p>";
-                string += "<p class='mb-1'>Axle 2 Axle: " + bow.axle2axle + "</p>";
-                string += "<p class='mb-1'>Draw Weight: " + bow.drawweight + "</p>";
-                string += "<p class='mb-1'>Draw Length: " + bow.drawlength + "</p>";
-                string += "<p class='mb-1'>Speed: " + bow.speed + "</p>";
-                string += "<p class='mb-1'>Color: " + bow.color + "</p>";
-                string += "<div class='d-flex w-100 justify-content-between'>";
-                string += "<small>Manufacturer: " + bow.url + "</small>";
-                string += "<button class='btn btn-dark' onclick=save(" + bow.name + ")>Save Bow to Favorites</button>";
-                string += "</div>";
-                string += "</li>";
-            });
-            document.getElementById("bowslist").innerHTML = string;
-        }
-
-        function addNewBowForm() {
-            var string = "";
-            string += "<div class='center'>";
-            string += "<form>";
-            string += "<h3>Add A Bow That Isn't Listed</h3>";
-            string += "<label>Name of Bow</label>";
-            string += "<input><br>";
-            string += "<label>Bow Type</label>";
-            string += "<select name='type'>";
-            string += "<option value='compound'>Compound</option>";
-            string += "<option value='recurve'>Recurve</option>";
-            string += "</select><br>";
-            string += "<label>Draw Weight</label>";
-            string += "<input type='number' step='any'><br>";
-            string += "<label>Draw Length</label>";
-            string += "<input type='number' step='any'><br>";
-            string += "<label>Mass Weight</label>";
-            string += "<input type='number' step='any'><br>";
-            string += "<label>Speed (fps)</label>";
-            string += "<input type='text'><br>";
-            string += "<label>Axle to Axle in Inches</label>";
-            string += "<input type='number' step='any'><br>";
-            string += "<label>Level</label>";
-            string += "<select>";
-            string += "<option value='beginner'>Beginner</option>";
-            string += "<option value='intermediate'>Intermediate</option>";
-            string += "<option value='advanced'>Advanced</option>";
-            string += "</select><br>";
-            string += "<label>Category</label>";
-            string += "<select>";
-            string += "<option value='hunting'>Hunting</option>";
-            string += "<option value='competition'>Competition Shooting</option>";
-            string += "</select><br>";
-            string += "</form>";
-            string += "</div>";
-            document.getElementById("addnewbow").innerHTML = string;
-        }
-    </script>
 
     <div class="container">
         <h1>Find Cool Bows</h1>
         <div class="center">
-            <h3>Show All Bows</h3>
-            <button class="btn btn-dark" onclick="allBows()">All Bows</button>
+            <button class="btn btn-dark" onclick="getAllBows()">Show All Bows</button>
+        
+            <button class="btn btn-dark" onclick="showFavorites()">Show Favorite Bows</button>
         </div>
         <div class="center">
-            <h3>Show Favorite Bows</h3>
-            <button class="btn btn-dark" onclick="showFavorites()">All Bows</button>
-        </div>
-        <div class="center">
-            <h3>Filter by Bowtype</h3>
+            <button class="btn btn-dark" value="Find Bows" onclick="searchBows()">Filter Bows by Type</button>
             <select class="custom-select" name="bowtype" id="bowtype">
                 <option selected disabled>Choose Your Bow Type</option>
                 <option value="recurve">Recurve</option>
                 <option value="compound">Compound</option>
             </select>
-            <button class="btn btn-dark" value="Find Bows" onclick="searchBows()">See Bows</button>
-        </div>
-        <div class="center">
-            <h3>Insert a New Bow</h3>
-            <button class="btn btn-dark" value="insertnewbow" onclick="addNewBowForm()">Add New Bow</button>
+            
         </div>
 
         <div id="bowslist">
-        </div>
-        <div id="addnewbow">
-
         </div>
     </div>
 
