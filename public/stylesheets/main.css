@@ -35,11 +35,16 @@ p {
 }
 
 img {
-  max-height: 400px;
+  max-height: 200px;
   margin: auto;
   display: flex;
 }
 
+#logo {
+  max-height: 400px;
+  margin: auto;
+  display: flex;
+}
 
 
 

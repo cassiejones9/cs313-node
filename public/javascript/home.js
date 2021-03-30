@@ -6,7 +6,7 @@ function getAllBows() {
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-        console.log("Back from the server with: " + data.list);
+        // console.log("Back from the server with: " + data.list);
         product = "";
         $.each(data.list, function (index, value) {
             product += "<div class='list-group'>";
@@ -16,8 +16,9 @@ function getAllBows() {
             product += "<small>Level: " + this.level + "</small>";
             product += "</div>";
             imagename = this.name;
-            imagetrimed = imagename.replace();
-            // product += "<img src='" + this.imgSrc + "' alt='" + this.name + "'></img>";
+            imagetrimed = imagename.replace(/ /g, '');
+            // console.log("this is the name trimmed of spaces" + imagetrimed);
+            product += "<img src='../images/" + imagetrimed + ".png' alt='" + this.name + "'></img>";
             product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
             product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
             product += "<p class='mb-1'>Draw Weight: " + this.drawweight + "</p>";
@@ -60,7 +61,10 @@ function searchBows() {
             product += "<h5 class='mb-1'>" + this.name + "</h5>";
             product += "<small>Level: " + this.level + "</small>";
             product += "</div>";
-            // product += "<img src='" + this.imgSrc + "' alt='" + this.name + "'></img>";
+            imagename = this.name;
+            imagetrimed = imagename.replace(/ /g, '');
+            // console.log("this is the name trimmed of spaces" + imagetrimed);
+            product += "<img src='../images/" + imagetrimed + ".png' alt='" + this.name + "'></img>";
             product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
             product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
             product += "<p class='mb-1'>Draw Weight: " + this.drawweight + "</p>";
