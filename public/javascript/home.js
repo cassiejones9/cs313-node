@@ -15,6 +15,8 @@ function getAllBows() {
             product += "<h5 class='mb-1'>" + this.name + "</h5>";
             product += "<small>Level: " + this.level + "</small>";
             product += "</div>";
+            imagename = this.name;
+            imagetrimed = imagename.replace();
             // product += "<img src='" + this.imgSrc + "' alt='" + this.name + "'></img>";
             product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
             product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
@@ -24,7 +26,7 @@ function getAllBows() {
             product += "<p class='mb-1'>Color: " + this.color + "</p>";
             product += "<div class='d-flex w-100 justify-content-between'>";
             product += "<small>Manufacturer: " + this.url + "</small>";
-            product += "<button class='btn btn-dark' onclick=save(" + this.name + ")>Save Bow to Favorites</button>";
+            // product += "<button class='btn btn-dark' onclick=save(" + this.name + ")>Save Bow to Favorites</button>";
             product += "</div>";
             product += "</li>";
         });
@@ -51,7 +53,7 @@ function searchBows() {
         success: (data) => {
             console.log('ajax success!', data);
             product = "";
-        $.each(data.list, function (index, value) {
+        $.each(data, function (index, value) {
             product += "<div class='list-group'>";
             product += "<li class='list-group-item list-group-item-action flex-column align-items-start'>";
             product += "<div class='d-flex w-100 justify-content-between'>";
@@ -67,12 +69,13 @@ function searchBows() {
             product += "<p class='mb-1'>Color: " + this.color + "</p>";
             product += "<div class='d-flex w-100 justify-content-between'>";
             product += "<small>Manufacturer: " + this.url + "</small>";
-            product += "<button class='btn btn-dark' onclick=save(" + this.name + ")>Save Bow to Favorites</button>";
+            // product += "<button class='btn btn-dark' onclick=save(" + this.name + ")>Save Bow to Favorites</button>";
             product += "</div>";
             product += "</li>";
         });
         result = "";
         result = product;
+        console.log(result);
         $("#bowslist").html(result);
         }
     })

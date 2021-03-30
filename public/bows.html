@@ -17,19 +17,20 @@
 
 
     <div class="container">
+        
+        <img src="../images/bowslogo.jpg" alt="Bows Logo">
         <h1>Find Cool Bows</h1>
         <div class="center">
             <button class="btn btn-dark" onclick="getAllBows()">Show All Bows</button>
-        
-            <button class="btn btn-dark" onclick="showFavorites()">Show Favorite Bows</button>
+            <!-- <button class="btn btn-dark" onclick="showFavorites()">Show Favorite Bows</button> -->
         </div>
         <div class="center">
-            <button class="btn btn-dark" value="Find Bows" onclick="searchBows()">Filter Bows by Type</button>
             <select class="custom-select" name="bowtype" id="bowtype">
                 <option selected disabled>Choose Your Bow Type</option>
                 <option value="recurve">Recurve</option>
                 <option value="compound">Compound</option>
-            </select>
+            </select><br><br>
+            <button class="btn btn-dark" value="Find Bows" onclick="searchBows()">Filter Bows by Type</button>
             
         </div>
 

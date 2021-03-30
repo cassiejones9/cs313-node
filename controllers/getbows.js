@@ -40,11 +40,12 @@ function searchBows(req, res) {
 }
 function searchBowsQuery(bowtype, callback) {
     console.log("into the SearchBowsQuery getting items from DB");
-    const sql = "SELECT name, drawWeight, drawLength, massWeight, speed, axle2axle, level, color, url FROM " + bowtype + ";";
+    const sql = "SELECT name, drawWeight, drawLength, massWeight, speed, axle2axle, level, color, url FROM " + bowtype;
     console.log(bowtype);
-    params = [bowtype];
-    pool.query(sql, params, function (err, db_results) {
+    console.log(sql);
+    pool.query(sql, function (err, db_results) {
         if (err) {
+            console.log(err + " is the error in the db")
             callback(err, null);
         } 
         console.log("back from the DB with results: " + db_results);
