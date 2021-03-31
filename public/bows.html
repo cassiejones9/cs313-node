@@ -19,19 +19,16 @@
     <div class="container">
         
         <img src="../images/bowslogo.jpg" alt="Bows Logo" id="logo">
-        <h1>Find Cool Bows</h1>
+        <h3>With so many manufacturers of bows, its hard to see a list of bows all in one place to compare. This list brings all the bows to you.</h3>
         <div class="center">
-            <button class="btn btn-dark" onclick="getAllBows()">Show All Bows</button>
+            <button class="btn btn-dark" onclick="getAllBows()">Show All Bows</button>&nbsp&nbsp;
             <!-- <button class="btn btn-dark" onclick="showFavorites()">Show Favorite Bows</button> -->
-        </div>
-        <div class="center">
-            <select class="custom-select" name="bowtype" id="bowtype">
-                <option selected disabled>Choose Your Bow Type</option>
+            <select class="custom-select" name="bowtype" id="bowtype" onchange="searchBows()">
+                <option selected disabled>Filter by Bow Type</option>
                 <option value="recurve">Recurve</option>
                 <option value="compound">Compound</option>
-            </select><br><br>
-            <button class="btn btn-dark" value="Find Bows" onclick="searchBows()">Filter Bows by Type</button>
-            
+            </select>
+            <button class="btn btn-dark" onclick="clear()">Clear List</button>
         </div>
 
         <div id="bowslist">

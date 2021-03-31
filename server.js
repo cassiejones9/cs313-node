@@ -6,7 +6,7 @@ const axios = require('axios');
 require('dotenv').config();
 const { Pool } = require("pg");
 // const db_url = process.env.DATABASE_URL;
-// console.log("DB url : " + db_url);
+
 const { response } = require("express");
 const PORT = process.env.PORT || 5000
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
@@ -27,20 +27,7 @@ app.set('view engine', 'ejs');
 app.get('/home', (req, res) => res.render('pages/index'));
 app.get('/allbows', bowController.getAllBows);
 app.post('/search', bowController.searchBows);
-// app.get('/allbows', (req, res) => {
-//     fetch('/project2/public/bows.js')
-//         .then(res => res.json());
-//         .then(data => {
-//             console.log('This is the fetch: ');
-//             console.log(data);
-//             this.bows = data;
-//             // res.status(200).json(data);
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         });
-// });
-// app.post('/bowtype', searchBows);
+// app.post('/save', bowController.saveBows);
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
