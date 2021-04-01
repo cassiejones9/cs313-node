@@ -14,9 +14,9 @@ const connectionString = process.env.DATABASE_URL // || "postgres://zwsijflxcncc
 // "postgres://project2user:project2@localhost:5432/project2";
 const pool = new Pool({
     connectionString: connectionString,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    // ssl: {
+    //     rejectUnauthorized: false
+    // }
 });
 const bowController = require("./controllers/getbows.js");
 
