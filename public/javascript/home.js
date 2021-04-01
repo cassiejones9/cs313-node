@@ -63,7 +63,7 @@ function searchBows() {
                 imagename = this.name;
                 console.log(imagename);
                 imagetrimed = imagename.replace(/ /g, '');
-                image = imagetrimed.toLowercase();
+                image = imagetrimed.toLowerCase();
                 console.log("this is the name trimmed of spaces" + image);
                 product += "<img src='/images/" + image + ".png' alt='" + this.name + "'></img>";
                 product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
