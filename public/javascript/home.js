@@ -63,7 +63,7 @@ function searchBows() {
                 imagename = this.name;
                 imagetrimed = imagename.replace(/ /g, '');
                 image = imagetrimed.toLowercase();
-                // console.log("this is the name trimmed of spaces" + imagetrimed);
+                console.log("this is the name trimmed of spaces" + image);
                 product += "<img src='/images/" + image + ".png' alt='" + this.name + "'></img>";
                 product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
                 product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
