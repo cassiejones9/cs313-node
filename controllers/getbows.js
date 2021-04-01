@@ -1,6 +1,11 @@
 const { Pool } = require('pg');
 const db_url = process.env.DATABASE_URL;
-const pool = new Pool({ connectionString: db_url });
+const pool = new Pool({
+    connectionString: db_url,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 // const connectionString = process.env.DATABASE_URL || "postgres://project2user:project2@localhost:5432/project2";
 
 function getAllBows(req, res) {
@@ -48,10 +53,10 @@ function searchBowsQuery(bowtype, callback) {
         if (err) {
             console.log(err + " is the error in the db")
             callback(err, null);
-        } 
+        }
         // console.log("back from the DB with results: " + db_results);
         callback(null, db_results.rows);
-        }
+    }
     )
 }
 
