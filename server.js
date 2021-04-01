@@ -9,7 +9,7 @@ const { Pool } = require("pg");
 
 const { response } = require("express");
 const PORT = process.env.PORT || 5000
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 const connectionString = process.env.DATABASE_URL || "postgres://project2user:project2@localhost:5432/project2";
 const pool = new Pool({
     connectionString: connectionString,
