@@ -61,6 +61,7 @@ function searchBows() {
                 product += "<small>Level: " + this.level + "</small>";
                 product += "</div>";
                 imagename = this.name;
+                console.log(imagename);
                 imagetrimed = imagename.replace(/ /g, '');
                 image = imagetrimed.toLowercase();
                 console.log("this is the name trimmed of spaces" + image);
