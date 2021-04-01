@@ -9,6 +9,7 @@ function getAllBows(req, res) {
 
     pool.query(sql, function (err, db_results) {
         if (err) {
+            console.log(err + " is the error");
             throw err;
         } else {
             // console.log("Back from the DB with : " + db_results);
