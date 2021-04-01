@@ -16,8 +16,9 @@ function getAllBows() {
                 product += "</div>";
                 imagename = this.name;
                 imagetrimed = imagename.replace(/ /g, '');
+                image = imagetrimed.toLowerCase();
                 // console.log("this is the name trimmed of spaces" + imagetrimed);
-                product += "<img src='/images/" + imagetrimed + ".png' alt='" + this.name + "'></img>";
+                product += "<img src='/images/" + image + ".png' alt='" + this.name + "'></img>";
                 product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
                 product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
                 product += "<p class='mb-1'>Draw Weight: " + this.drawweight + "</p>";
@@ -61,10 +62,8 @@ function searchBows() {
                 product += "<small>Level: " + this.level + "</small>";
                 product += "</div>";
                 imagename = this.name;
-                console.log(imagename);
                 imagetrimed = imagename.replace(/ /g, '');
                 image = imagetrimed.toLowerCase();
-                console.log("this is the name trimmed of spaces" + image);
                 product += "<img src='/images/" + image + ".png' alt='" + this.name + "'></img>";
                 product += "<p class='mb-1'>Mass Weight: " + this.massweight + "</p>";
                 product += "<p class='mb-1'>Axle 2 Axle: " + this.axle2axle + "</p>";
