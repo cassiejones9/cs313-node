@@ -87,12 +87,20 @@ function searchBows() {
     })
 }
 
-function clear() {
-    console.log("made it to the clear function")
-    // result = " ";
-    let bowslist = document.getElementById("bowslist");
-    bowslist.innerHTML = "";
-    // $('#bowslist').html(result);
+// function clear() {
+//     console.log("made it to the clear function");
+//     // result = " ";
+//     let bowslist = document.getElementById("bowslist");
+//     bowslist.innerHTML = "";
+//     // $('#bowslist').html(result);
+// }
+
+function clearList() {
+    console.log("into the dummy function that doesn't do anything");
+    // let bowslist = document.getElementById("bowslist");
+    // bowslist.innerHTML = "";
+    result = " ";
+    $('#bowslist').html(result);
 }
 
 // function save(bowid){
