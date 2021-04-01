@@ -10,7 +10,7 @@ const { Pool } = require("pg");
 const { response } = require("express");
 const PORT = process.env.PORT || 5000
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-const connectionString = process.env.DATABASE_URL || "postgres://zwsijflxcnccnv:9b23926c67f025ea41b78fd96fb167a6612f20920c9371d466249cfc6e19c779@ec2-3-222-11-129.compute-1.amazonaws.com:5432/dedv6bqm4sj9r5?ssl=true";
+const connectionString = process.env.DATABASE_URL // || "postgres://zwsijflxcnccnv:9b23926c67f025ea41b78fd96fb167a6612f20920c9371d466249cfc6e19c779@ec2-3-222-11-129.compute-1.amazonaws.com:5432/dedv6bqm4sj9r5?ssl=true";
 // "postgres://project2user:project2@localhost:5432/project2";
 const pool = new Pool({
     connectionString: connectionString,

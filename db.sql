@@ -4,6 +4,13 @@ GRANT USAGE, SELECT ON SEQUENCE compound_id_seq TO project2user;
 GRANT SELECT, INSERT, UPDATE ON recurve TO project2user;
 GRANT USAGE, SELECT ON SEQUENCE recurve_id_seq TO project2user;
 
+CREATE ROLE user_name;
+ALTER ROLE user_name WITH LOGIN PASSWORD 'password' NOSUPERUSER NOCREATEDB NOCREATEROLE;
+CREATE DATABASE database_name OWNER user_name;
+REVOKE ALL ON DATABASE database_name FROM PUBLIC;
+GRANT CONNECT ON DATABASE dedv6bqm4sj9r5 TO zwsijflxcnccnv;
+GRANT ALL ON DATABASE dedv6bqm4sj9r5 TO zwsijflxcnccnv;
+
 CREATE TABLE compound (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR (100),
@@ -79,3 +86,10 @@ INSERT INTO compound(name, drawweight, drawlength, massweight, speed, axle2axle,
 INSERT INTO compound(name, drawweight, drawlength, massweight, speed, axle2axle, level, category, color, url) VALUES ('Monster Safari', '70, 85', '25.5" - 31"', '4.8 lbs', '350 fps', '33', 'advanced', 'hunting', 'Black', 'https://www.mathewsinc.com/product/monster-safari/');
 
 INSERT INTO compound(name, drawweight, drawlength, massweight, speed, axle2axle, level, category, color, url) VALUES ('', '', '', '', '', '', '', '', '', '');
+
+CREATE ROLE user_name;
+ALTER ROLE user_name WITH LOGIN PASSWORD 'password' NOSUPERUSER NOCREATEDB NOCREATEROLE;
+CREATE DATABASE database_name OWNER user_name;
+REVOKE ALL ON DATABASE database_name FROM PUBLIC;
+GRANT CONNECT ON DATABASE database_name TO user_name;
+GRANT ALL ON DATABASE database_name TO user_name;
