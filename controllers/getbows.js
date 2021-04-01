@@ -60,10 +60,6 @@ function searchBowsQuery(bowtype, callback) {
     )
 }
 
-// function saveBows(req, res) {
-
-// }
-
 module.exports = {
     getAllBows: getAllBows,
     searchBows: searchBows,
